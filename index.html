@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ultimate ToDo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#6366f1',
+            secondary: '#8b5cf6',
+            dark: '#1e293b',
+            light: '#f8fafc'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen font-sans">
+  <div class="container mx-auto px-4 py-4 max-w-3xl">
+    <div data-aos="zoom-in" class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+      <!-- App Header -->
+      <div class="bg-gradient-to-r from-primary to-secondary p-8 text-white">
+        <div class="flex justify-between items-center">
+          <div>
+            <h1 class="text-3xl font-bold">Ultimate ToDo</h1>
+            <p class="text-primary-100 opacity-90">Organize your life effortlessly</p>
+          </div>
+          <div class="text-4xl opacity-80">
+            <i class="fas fa-tasks"></i>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Main Content -->
+      <div class="p-8">
+        <!-- Add Task Form -->
+        <div class="flex mb-8 gap-2">
+          <input id="taskInput" type="text" placeholder="What needs to be done?" 
+                 class="flex-1 px-6 py-4 border-0 rounded-xl bg-gray-50 focus:ring-2 focus:ring-primary focus:bg-white shadow-sm text-lg">
+          <button onclick="addTask()" 
+                  class="bg-primary hover:bg-primary-600 text-white px-6 py-4 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg flex items-center gap-2">
+            <i class="fas fa-plus"></i> <span class="hidden sm:inline">Add Task</span>
+          </button>
+        </div>
+        
+        <!-- Task Controls -->
+        <div class="flex flex-wrap justify-between items-center mb-6 gap-4">
+          <div class="flex gap-2">
+            <button id="filterAll" onclick="filterTasks('all')" 
+                    class="filter-btn active bg-primary text-white px-4 py-2 rounded-lg">
+              All
+            </button>
+            <button id="filterActive" onclick="filterTasks('active')" 
+                    class="filter-btn bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-lg transition">
+              Active
+            </button>
+            <button id="filterCompleted" onclick="filterTasks('completed')" 
+                    class="filter-btn bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-lg transition">
+              Completed
+            </button>
+          </div>
+          
+          <div class="flex gap-2">
+            <button onclick="clearCompletedTasks()" 
+                    class="text-gray-500 hover:text-primary px-3 py-2 rounded-lg transition flex items-center gap-1">
+              <i class="fas fa-trash-alt"></i> <span class="hidden sm:inline">Clear Completed</span>
+            </button>
+            <button onclick="clearAllTasks()" 
+                    class="text-red-500 hover:text-red-600 px-3 py-2 rounded-lg transition flex items-center gap-1">
+              <i class="fas fa-broom"></i> <span class="hidden sm:inline">Clear All</span>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Task List -->
+        <ul id="taskList" class="space-y-3"></ul>
+        
+        <!-- Empty State -->
+        <div id="emptyState" class="text-center py-12 text-gray-400">
+          <div class="text-6xl mb-4 opacity-30">
+            <i class="fas fa-clipboard-list"></i>
+          </div>
+          <h3 class="text-xl font-medium text-gray-500 mb-2">No tasks found</h3>
+          <p class="text-gray-400">Add a task above to get started</p>
+        </div>
+        
+        <!-- Stats -->
+        <div id="taskStats" class="mt-6 text-sm text-gray-500 text-center hidden">
+          <span id="completedCount">0</span> of <span id="totalCount">0</span> tasks completed
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    AOS.init({
+      duration: 600,
+      easing: 'ease-out-quad',
+      once: true,
+      offset: 50
+    });
+  </script>
+</body>
+</html>
